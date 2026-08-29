@@ -1,50 +1,102 @@
-# Hangman Game
+# Emoji Text Converter
 
-A simple terminal-based Hangman game written in Python. The computer chooses a word, and you guess it one letter at a time before the Hangman drawing is complete.
+Emoji Text Converter is a small command-line Python project for exploring Unicode text. It can find emojis in a message, remove them, replace them with descriptive names, and count how often each emoji appears.
 
 ## Features
 
-- Randomly selects a word from an offline word list
-- Reveals every occurrence of correctly guessed letters
-- Tracks guessed letters and incorrect guesses
-- Shows a Hangman drawing for each mistake
-- Validates empty, repeated, numeric, punctuation, and multi-character input
-- Supports uppercase and lowercase letter guesses
-- Reveals the answer after a loss
-- Allows multiple rounds without restarting the program
+- Detect emojis and display their descriptions
+- Remove emojis without changing the rest of the message
+- Replace emojis with readable `:descriptions:`
+- Show total and per-emoji statistics
+- Process as many messages as needed during one run
+- Handle empty input and invalid menu choices without crashing
 
-## How to Run
+## Technologies
 
-Make sure Python 3 is installed, then run:
+- Python 3
+- [demoji](https://pypi.org/project/demoji/) for emoji recognition and descriptions
+- `unittest` from the Python standard library
+- Git
+
+## Installation
+
+Create and activate a virtual environment from the project directory:
 
 ```bash
-python hangman.py
+python -m venv venv
 ```
 
-On some systems, use `python3 hangman.py` instead.
+Windows PowerShell:
 
-## How to Play
+```powershell
+venv\Scripts\Activate.ps1
+```
 
-1. Start the program.
-2. Enter one letter when prompted.
-3. Correct guesses reveal letters in the word.
-4. Wrong guesses add a part to the Hangman drawing.
-5. Guess the complete word before six wrong guesses.
-6. Choose `y` to play another round or `n` to quit.
+macOS/Linux:
 
-## Example
+```bash
+source venv/bin/activate
+```
+
+Install the dependency:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+`demoji` includes the emoji data needed by the program, so processing text does not require an internet connection after installation.
+
+## Usage
+
+Run the application from the project directory:
+
+```bash
+python main.py
+```
+
+Choose an option from the menu, enter a message, and then choose another action. Select `5` to exit.
+
+Example:
 
 ```text
-Word: _ _ _ _ _ _
-Guessed letters: a, e
-Wrong guesses: 2/6
+Choose an option: 3
 
-Guess a letter: r
-Good guess! That letter is in the word.
+Enter text: I love Python 🐍 and coding 💻🔥
+
+Converted:
+I love Python :snake: and coding :laptop::fire:
 ```
 
-The exact word and drawing depend on the random round.
+Option `1` lists each emoji and its description. Option `4` reports the total and counts repeated emojis.
 
-## Concepts Practiced
+## Project Structure
 
-This project practices variables, strings, lists and tuples, sets, loops, conditionals, functions, random selection, input validation, and basic exception-free error handling.
+```text
+├── src/
+│   ├── converter.py       # Reusable conversion and counting functions
+│   ├── main.py            # Interactive menu
+│   └── statistics.py      # Statistics report formatting
+├── tests/
+│   └── test_converter.py  # Unit tests for conversion behavior
+├── examples/
+│   └── example_text.txt   # Sample input
+├── main.py                # Root command-line entry point
+├── requirements.txt       # External dependency list
+└── .gitignore
+```
+
+## Running Tests
+
+No test framework installation is required:
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+## What I Learned
+
+This project gave me practice working with an external Python package, Unicode strings, dictionaries and `Counter`, reusable functions, input validation, a looping CLI menu, and unit testing. Separating the converter logic from the menu also makes the useful parts easier to test without simulating every prompt.
+
+## Possible Improvements
+
+A future version could support reading a text file, exporting converted text, choosing between several replacement styles, or adding a small graphical interface.
