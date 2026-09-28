@@ -13,12 +13,14 @@ Emoji Text Converter is a small command-line Python project for exploring Unicod
 
 ## Technologies
 
-- Python 3
+- Python 3.10 or newer
 - [demoji](https://pypi.org/project/demoji/) for emoji recognition and descriptions
 - `unittest` from the Python standard library
 - Git
 
 ## Installation
+
+Use Python 3.10 or newer: the command-line interface uses `str | None` type annotations. Check that `python --version` reports a supported version before creating the environment.
 
 Create and activate a virtual environment from the project directory:
 
@@ -87,7 +89,7 @@ Option `1` lists each emoji and its description. Option `4` reports the total an
 
 ## Running Tests
 
-No test framework installation is required:
+With the virtual environment activated and `requirements.txt` installed, run the tests from the project directory. The tests use the standard-library `unittest` runner, but still require `demoji` because they import the converter:
 
 ```bash
 python -m unittest discover -s tests -v
